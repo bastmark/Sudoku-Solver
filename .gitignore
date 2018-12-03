@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Recursively allow src files
+!src
+!src/**
+
+# Always ignore these files
+*.DS_Store
+../.idea/
+
+# Allow these files
+!.project
+!.gitignore
