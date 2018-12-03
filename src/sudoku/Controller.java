@@ -1,4 +1,4 @@
-package sample;
+package sudoku;
 
 public class Controller {
 }
