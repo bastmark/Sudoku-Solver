@@ -11,6 +11,11 @@ public class Sudoku {
         board = new int[size][size];
     }
 
+    public Sudoku(int[][] board){
+        this.board = board;
+        size = board.length;
+    }
+
     public boolean insert(int value, int row, int col) {
         try {
             board[row][col] = value;

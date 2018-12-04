@@ -4,6 +4,8 @@
 # Recursively allow src files
 !src
 !src/**
+!test
+!test/**
 
 # Always ignore these files
 *.DS_Store
