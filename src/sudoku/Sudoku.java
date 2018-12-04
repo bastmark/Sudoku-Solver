@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Sudoku {
     private int[][] board;
     private int size = 9;
+    private int empty=0;
 
     public Sudoku() {
         board = new int[size][size];
@@ -50,7 +51,29 @@ public class Sudoku {
 
         return true;
     }
+    
+    public boolean solve() {
+    	for(int row=0;row<size; size++) {
+    		for(int col=0;col<size; size++) {
+    			if(board[row][col]==empty) {						//Check if box is empty
+    				for(int number=1; number<=size; number++) {
+    					if(solved()==true) {
+    						insert(number, row, col);
+    					}
+    					if(solve()) {
+    						return true;
+    					}else {
+    						board[row][col]=empty;
+    					}
+    				}
+    			}
+    			return false;
+    		}
+    	}
+    	return true;
+    }
 
+    
     private boolean containsDuplicates(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
