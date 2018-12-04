@@ -63,6 +63,7 @@ public class Sudoku {
                 s[j] = board[(i % 3) * 3 + j % 3][(int) (j / 3) + (int) (i / 3) * 3];
             }
 
+            // Strip the zeros (since we only want to check if current input is valid)
             r = Arrays.stream(r).filter(value -> value != 0).toArray();
             c = Arrays.stream(c).filter(value -> value != 0).toArray();
             s = Arrays.stream(s).filter(value -> value != 0).toArray();
