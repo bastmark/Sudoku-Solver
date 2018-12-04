@@ -25,6 +25,10 @@ public class Sudoku {
         }
     }
 
+    public int[][] getBoard(){
+        return board;
+    }
+
     public int get(int row, int col) {
         try {
             return board[row][col];
