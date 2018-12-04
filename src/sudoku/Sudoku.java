@@ -8,7 +8,6 @@ import static sudoku.Utils.flatten;
 public class Sudoku {
     private int[][] board;
     private int size = 9;
-    private int empty=0;
 
     public Sudoku() {
         board = new int[size][size];
@@ -48,8 +47,7 @@ public class Sudoku {
         }
     }
 
-    // Checks if the board has been solved. If "useValid" is set to true, the function checks if the board
-    // is valid this far, (multiple zeroes aren't counted as duplicates)
+    // Checks if the board is valid so far
     public boolean valid() {
         for (int i = 0; i < size; i++) {
             int[] r = new int[size];
@@ -79,6 +77,7 @@ public class Sudoku {
         return true;
     }
 
+    // Checks if the sudoku has been solved (valid and all values are != 0)
     public boolean solved() {
         return valid() && filled();
     }
@@ -86,5 +85,20 @@ public class Sudoku {
     // new solve function in the making
     public boolean solve() {
     	return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int[] row : board) {
+            for (int val : row) {
+                sb.append(String.valueOf(val)).append(" ");
+            }
+
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 }

@@ -26,8 +26,8 @@ public class Controller {
 
         for (int i = 0; i < game.size(); i++) {
             for (int j = 0; j < game.size(); j++) {
-                final int row = j;
-                final int col = i;
+                final int row = i;
+                final int col = j;
 
                 TextField field = new NumberTextField();
                 field.setAlignment(Pos.CENTER);
@@ -35,8 +35,12 @@ public class Controller {
                     game.insert(newValue.equals("") ? 0 : Integer.valueOf(newValue), row, col);
                 });
 
-                grid.add(field, row, col);
+                grid.add(field, col, row);
             }
         }
+
+        clearButton.setOnAction(x -> {
+            System.out.println(game);
+        });
     }
 }
