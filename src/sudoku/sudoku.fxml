@@ -13,5 +13,6 @@
         </padding>
         <Button fx:id="solveButton" text="Solve"></Button>
         <Button fx:id="clearButton" text="Clear"></Button>
+        <Button fx:id="openButton" text="Open"></Button>
     </HBox>
 </VBox>

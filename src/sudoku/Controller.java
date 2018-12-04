@@ -5,9 +5,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import java.io.*;
+import java.util.Scanner;
 
 
 public class Controller {
@@ -21,6 +23,8 @@ public class Controller {
     private Button solveButton;
     @FXML
     private Button clearButton;
+    @FXML
+    private Button openButton;
 
     public Controller() {
     }
@@ -73,6 +77,37 @@ public class Controller {
                 }
             }
         });
+
+        // Opens FileChooser dialog and calls load file with selected .txt file
+        openButton.setOnAction(x -> {
+            FileChooser fileChooser = new FileChooser();
+
+            // Set extension filter to open .txt files only
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            // Show open file dialog
+            File file = fileChooser.showOpenDialog(openButton.getScene().getWindow());
+
+            // Call loadFile with opened file
+            if(file != null){
+                loadFile(file);
+            }
+        });
+
+    }
+
+    // scans a file and updates all the TextFields in grid with corresponding values of the file
+    private void loadFile(File file){
+        try (Scanner scanner = new Scanner(file)) {
+            for (Node child : grid.getChildren()) {
+                if (child instanceof NumberTextField) {
+                    ((NumberTextField) child).setText(
+                            String.valueOf(scanner.nextInt()).replace("0", "")
+                    );
+                }
+            }
+        } catch (IOException ignore){}
     }
 
     private TextField getTextField(final int row, final int column, GridPane gp) {
