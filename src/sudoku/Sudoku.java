@@ -37,7 +37,9 @@ public class Sudoku {
         }
     }
 
-    public boolean solved() {
+    // Checks if the board has been solved. If "useValid" is set to true, the function checks if the board
+    // is valid this far, (multiple zeroes aren't counted as duplicates)
+    public boolean solved(boolean useValid) {
         for (int i = 0; i < size; i++) {
             int[] r = new int[size];
             int[] c = new int[size];
@@ -53,48 +55,33 @@ public class Sudoku {
             }
 
             // Check if any of the arrays (row, column, section) contain duplicate values
-            if (containsDuplicates(r) || containsDuplicates(c) || containsDuplicates(s)) {
+            if (containsDuplicates(r, useValid) || containsDuplicates(c, useValid) || containsDuplicates(s,useValid)) {
                 return false;
             }
         }
 
         return true;
     }
-    
+
+    // new solve function in the making
     public boolean solve() {
-    	for(int row=0;row<size; row++) {
-    		for(int col=0;col<size; col++) {
-    			if(board[row][col]==empty) {						//Check if box is empty
-    				for(int number=1; number<=size; number++) {
-    					if(solved()==true) {
-    						insert(number, row, col);
-    					}
-    					if(solved()) {
-    						return true;
-    					}else {
-    						board[row][col]=empty;
-    					}
-    				}
-    			}
-    			return false;
-    		}
-    	}
     	return true;
     }
 
-    
-    private boolean containsDuplicates(int[] arr) {
+    private boolean containsDuplicates(int[] arr, boolean useValid) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] == arr[j]) {
-                    return true;
+                if (useValid) {
+                    if (arr[i] == arr[j] && arr[i] != 0 && arr[j] != 0) {
+                        return true;
+                    }
+                } else {
+                    if (arr[i] == arr[j]) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-
     }
 }
