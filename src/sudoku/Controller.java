@@ -5,16 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-
-import javax.xml.soap.Text;
+import javafx.scene.layout.HBox;
 
 
 public class Controller {
     @FXML
     private GridPane grid;
     @FXML
-    private VBox vbox;
+    private HBox hbox;
     @FXML
     private Button solveButton;
     @FXML
@@ -26,8 +24,8 @@ public class Controller {
     public void initialize() {
         Sudoku game = new Sudoku();
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < game.size(); i++) {
+            for (int j = 0; j < game.size(); j++) {
                 final int row = j;
                 final int col = i;
 
