@@ -16,6 +16,10 @@ public class Sudoku {
         size = board.length;
     }
 
+    public int size() {
+        return size;
+    }
+
     public boolean insert(int value, int row, int col) {
         try {
             board[row][col] = value;
