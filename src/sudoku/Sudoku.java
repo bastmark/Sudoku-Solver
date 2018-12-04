@@ -65,11 +65,10 @@ public class Sudoku {
                 s[j] = board[(i % 3) * 3 + j % 3][(int) (j / 3) + (int) (i / 3) * 3];
             }
 
-            if (!filled()) {
-                r = Arrays.stream(r).filter(value -> value != 0).toArray();
-                c = Arrays.stream(c).filter(value -> value != 0).toArray();
-                s = Arrays.stream(s).filter(value -> value != 0).toArray();
-            }
+            r = Arrays.stream(r).filter(value -> value != 0).toArray();
+            c = Arrays.stream(c).filter(value -> value != 0).toArray();
+            s = Arrays.stream(s).filter(value -> value != 0).toArray();
+
             // Check if any of the arrays (row, column, section) contain duplicate values
             if ((containsDuplicates(r) || containsDuplicates(c) || containsDuplicates(s))) {
                 return false;
