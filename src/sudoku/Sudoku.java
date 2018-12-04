@@ -2,6 +2,9 @@ package sudoku;
 
 import java.util.Arrays;
 
+import static sudoku.Utils.containsDuplicates;
+import static sudoku.Utils.flatten;
+
 public class Sudoku {
     private int[][] board;
     private int size = 9;
@@ -18,6 +21,10 @@ public class Sudoku {
 
     public int size() {
         return size;
+    }
+
+    public boolean filled() {
+        return flatten(board).noneMatch(value -> value.equals(0));
     }
 
     public boolean insert(int value, int row, int col) {
@@ -43,7 +50,7 @@ public class Sudoku {
 
     // Checks if the board has been solved. If "useValid" is set to true, the function checks if the board
     // is valid this far, (multiple zeroes aren't counted as duplicates)
-    public boolean solved(boolean useValid) {
+    public boolean valid() {
         for (int i = 0; i < size; i++) {
             int[] r = new int[size];
             int[] c = new int[size];
@@ -58,8 +65,13 @@ public class Sudoku {
                 s[j] = board[(i % 3) * 3 + j % 3][(int) (j / 3) + (int) (i / 3) * 3];
             }
 
+            if (!filled()) {
+                r = Arrays.stream(r).filter(value -> value != 0).toArray();
+                c = Arrays.stream(c).filter(value -> value != 0).toArray();
+                s = Arrays.stream(s).filter(value -> value != 0).toArray();
+            }
             // Check if any of the arrays (row, column, section) contain duplicate values
-            if (containsDuplicates(r, useValid) || containsDuplicates(c, useValid) || containsDuplicates(s,useValid)) {
+            if ((containsDuplicates(r) || containsDuplicates(c) || containsDuplicates(s))) {
                 return false;
             }
         }
@@ -67,25 +79,12 @@ public class Sudoku {
         return true;
     }
 
+    public boolean solved() {
+        return valid() && filled();
+    }
+
     // new solve function in the making
     public boolean solve() {
     	return true;
-    }
-
-    private boolean containsDuplicates(int[] arr, boolean useValid) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (useValid) {
-                    if (arr[i] == arr[j] && arr[i] != 0 && arr[j] != 0) {
-                        return true;
-                    }
-                } else {
-                    if (arr[i] == arr[j]) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

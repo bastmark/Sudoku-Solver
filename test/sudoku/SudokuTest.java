@@ -54,7 +54,7 @@ public class SudokuTest {
 
         sdk = new Sudoku(solvedBoard);
 
-        assertTrue("Testing solved on solved board", sdk.solved(false));
+        assertTrue("Testing solved on solved board", sdk.solved());
     }
 
     @Test
