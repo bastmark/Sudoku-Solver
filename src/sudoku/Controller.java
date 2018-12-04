@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -35,6 +36,18 @@ public class Controller {
 
                 TextField field = new NumberTextField();
                 field.setAlignment(Pos.CENTER);
+                field.setPrefSize(100, 100);
+                field.setMinWidth(20);
+                field.setMinHeight(20);
+
+                // Lite fulkod
+                field.setStyle("-fx-background-color: #d7efe3;");
+                if (i < 3 || i > 5) {
+                    if (j < 3 || j > 5) field.setStyle("-fx-background-color: #96e0bb;");
+                } else {
+                    if (j > 2 && j < 6) field.setStyle("-fx-background-color: #96e0bb;");
+                }
+
                 field.textProperty().addListener((observable, oldValue, newValue) -> {
                     game.insert(newValue.equals("") ? 0 : Integer.valueOf(newValue), row, col);
                 });
