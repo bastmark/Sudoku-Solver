@@ -14,6 +14,17 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+       Sudoku sud = new Sudoku();
+       sud.insert(2, 3, 4);
+       sud.insert(3, 4, 5);
+       sud.insert(4, 5, 6);
+       sud.insert(5, 6, 7);
+       sud.insert(6, 7, 8);
+       if(sud.solve()) {
+    	   System.out.println("lösning finns");
+       }else {
+    	   System.out.println("lösning saknas");
+       }
     }
 
 
