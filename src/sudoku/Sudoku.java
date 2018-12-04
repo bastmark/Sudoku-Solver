@@ -82,9 +82,25 @@ public class Sudoku {
         return valid() && filled();
     }
 
-    // new solve function in the making
+    // Solves the Sudoku with its current values if possible
     public boolean solve() {
-    	return true;
+        if (!valid()) return false;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                // If there is a 0 value
+                if (board[i][j] == 0) {
+                    // Generate a value that fits the board
+                    for (int k = 1; k <= 9; k++) {
+                        board[i][j] = k;
+                        if (solve()) return true;
+                        board[i][j] = 0;
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
