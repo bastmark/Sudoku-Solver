@@ -11,6 +11,11 @@ public class Sudoku {
         board = new int[size][size];
     }
 
+    public Sudoku(int[][] board){
+        this.board = board;
+        size = board.length;
+    }
+
     public boolean insert(int value, int row, int col) {
         try {
             board[row][col] = value;
@@ -18,6 +23,10 @@ public class Sudoku {
         } catch (IndexOutOfBoundsException e) {
             return false;
         }
+    }
+
+    public int[][] getBoard(){
+        return board;
     }
 
     public int get(int row, int col) {
@@ -53,14 +62,14 @@ public class Sudoku {
     }
     
     public boolean solve() {
-    	for(int row=0;row<size; size++) {
-    		for(int col=0;col<size; size++) {
+    	for(int row=0;row<size; row++) {
+    		for(int col=0;col<size; col++) {
     			if(board[row][col]==empty) {						//Check if box is empty
     				for(int number=1; number<=size; number++) {
     					if(solved()==true) {
     						insert(number, row, col);
     					}
-    					if(solve()) {
+    					if(solved()) {
     						return true;
     					}else {
     						board[row][col]=empty;
