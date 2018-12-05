@@ -6,6 +6,8 @@
 !src/**
 !test
 !test/**
+!sudokus
+!sudokus/**
 
 # Always ignore these files
 *.DS_Store
