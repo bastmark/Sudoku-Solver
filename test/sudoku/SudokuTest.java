@@ -8,6 +8,15 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for Sudoku class
+ * @author Johannes Bastmark
+ * @author Szymon Stypa
+ * @author Axel Domell
+ *
+ * @version 1.0
+ * @see <a href="https://github.com/bastmark/Sudoku-solver">Github repository</a>
+ */
 public class SudokuTest {
     private Sudoku sdk;
 

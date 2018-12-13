@@ -8,6 +8,8 @@
 !test/**
 !sudokus
 !sudokus/**
+!docs
+!docs/**
 
 # Always ignore these files
 *.DS_Store

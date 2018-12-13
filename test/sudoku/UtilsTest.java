@@ -6,6 +6,15 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for Utils class
+ * @author Johannes Bastmark
+ * @author Szymon Stypa
+ * @author Axel Domell
+ *
+ * @version 1.0
+ * @see <a href="https://github.com/bastmark/Sudoku-solver">Github repository</a>
+ */
 public class UtilsTest {
 
     private int[] arrNon = {1,2,3,4,5,6,7,8,9};

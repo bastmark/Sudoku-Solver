@@ -1,32 +1,64 @@
 package sudoku;
 
 import java.util.Arrays;
-
 import static sudoku.Utils.containsDuplicates;
 import static sudoku.Utils.flatten;
 
+/**
+ * Sudoku class used to create a Sudoku object. Containing methods using backtracking to solve a sudoku puzzle.
+ *
+ * @author Johannes Bastmark
+ * @author Szymon Stypa
+ * @author Axel Domell
+ *
+ * @version 1.0
+ * @see <a href="https://github.com/bastmark/Sudoku-solver">Github repository</a>
+ */
 public class Sudoku {
     private int[][] board;
     private int size = 9;
 
+    /**
+     * Sudoku constructor.
+     */
     public Sudoku() {
         board = new int[size][size];
     }
 
+    /**
+     * Sudoku constructor.
+     * @param board corresponds to a sudoku puzzle
+     */
     public Sudoku(int[][] board){
         this.board = board;
         size = board.length;
     }
 
-    public int size() {
+    /**
+     * Returns size. Size is the length or height of the board.
+     * @return int size
+     */
+    int size() {
         return size;
     }
 
-    public boolean filled() {
+    /**
+     * Returns filled. True if board contains no "0" else false.
+     * @return boolean filled
+     */
+    private boolean filled() {
         return flatten(board).noneMatch(value -> value.equals(0));
     }
 
-    public boolean insert(int value, int row, int col) {
+    /**
+     * Inserts value at row, col in the sudoku board.
+     * Returns true if value could be inserted at position else false.
+     * @param value value
+     * @param row row in board
+     * @param col column in board
+     * @return boolean insert
+     */
+    boolean insert(int value, int row, int col) {
         try {
             board[row][col] = value;
             return true;
@@ -35,11 +67,21 @@ public class Sudoku {
         }
     }
 
-    public int[][] getBoard(){
+    /**
+     * Returns the sudoku board.
+     * @return int[][] getBoard
+     */
+    int[][] getBoard(){
         return board;
     }
 
-    public int get(int row, int col) {
+    /**
+     * Returns value at row, col in the sudoku board.
+     * @param row row in board
+     * @param col column in board
+     * @return int value
+     */
+    int get(int row, int col) {
         try {
             return board[row][col];
         } catch (IndexOutOfBoundsException e) {
@@ -47,8 +89,13 @@ public class Sudoku {
         }
     }
 
-    // Checks if the board is valid so far
-    public boolean valid() {
+    /**
+     * Returns boolean. True if board is valid else false.
+     * Board is valid if no value exist more than one time in each given row, column and section of the sudoku board.
+     * values of 0 can be multiple.
+     * @return boolean valid
+     */
+    boolean valid() {
         for (int i = 0; i < size; i++) {
             int[] r = new int[size];
             int[] c = new int[size];
@@ -60,7 +107,7 @@ public class Sudoku {
                 // Get all values in column
                 c[j] = board[j][i];
                 // Get all values in section
-                s[j] = board[(i % 3) * 3 + j % 3][(int) (j / 3) + (int) (i / 3) * 3];
+                s[j] = board[(i % 3) * 3 + j % 3][(j / 3) + (i / 3) * 3];
             }
 
             // Strip the zeros (since we only want to check if current input is valid)
@@ -77,13 +124,20 @@ public class Sudoku {
         return true;
     }
 
-    // Checks if the sudoku has been solved (valid and all values are != 0)
-    public boolean solved() {
+    /**
+     * Returns boolean. True if board is solved else false (valid and filled).
+     * Board is valid if no value exist more than one time in each given row, column and section of the sudoku board.
+     * @return boolean solved
+     */
+    boolean solved() {
         return valid() && filled();
     }
 
-    // Solves the Sudoku with its current values if possible
-    public boolean solve() {
+    /**
+     * Returns boolean. True if the sudoku board could be solved else false.
+     * @return boolean solve
+     */
+    boolean solve() {
         if (!valid()) return false;
 
         for (int i = 0; i < size; i++) {
@@ -103,13 +157,17 @@ public class Sudoku {
         return true;
     }
 
+    /**
+     * Returns String. Returns a string representation of the current sudoku board.
+     * @return String toString
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
         for (int[] row : board) {
             for (int val : row) {
-                sb.append(String.valueOf(val)).append(" ");
+                sb.append(val).append(" ");
             }
 
             sb.append("\n");
